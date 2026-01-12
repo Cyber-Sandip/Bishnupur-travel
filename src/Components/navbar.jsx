@@ -18,19 +18,22 @@ export default function Nav(){
                         Home
                     </button>
                     <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                    onClick={() => navigate('/Temple')}
+                    onClick={() => navigate('/')}
                     >
                         Temple
                     </button>
                     <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                    onClick={() => navigate('/Temple')}
                     >
                         Art & craft                    
                     </button>
                     <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                    onClick={() => navigate('/Art And Craft')}
                     >
                         Natural View
                     </button>
                     <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                    onClick={() => navigate('/Naturalview')}
                     >
                         Contract us
                     </button>
