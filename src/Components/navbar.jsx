@@ -17,26 +17,33 @@ export default function Nav(){
                     >
                         Home
                     </button>
-                    <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                    onClick={() => navigate('/')}
-                    >
-                        Temple
-                    </button>
+
                     <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
                     onClick={() => navigate('/Temple')}
                     >
+                        Temple
+                    </button>
+
+                    <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                    onClick={() => navigate('/art')}
+                    >
                         Art & craft                    
                     </button>
+
                     <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                    onClick={() => navigate('/Art And Craft')}
+                    onClick={() => navigate('/Natural-view')}
                     >
                         Natural View
                     </button>
+
                     <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                    onClick={() => navigate('/Naturalview')}
+                    onClick={() => navigate('/Contact')}
                     >
-                        Contract us
+                        Contact us
                     </button>
+                    
+                
+                   
 
                 </div>                 
                 
@@ -46,5 +53,6 @@ export default function Nav(){
             </div>
 
         </div>
+        
     );
 }
