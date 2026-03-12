@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Nav from "../../Components/navbar";
 
 export default function ArtCraftPage() {
 
@@ -61,13 +62,14 @@ export default function ArtCraftPage() {
     <div
       style={{
         minHeight: "100vh",
-        padding: "50px",
+        padding: "80px 20px 50px",
         backgroundImage:
           "url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2')",
         backgroundSize: "cover",
         backgroundPosition: "center"
       }}
     >
+      <Nav />
 
       {/* Glass Container */}
       <div

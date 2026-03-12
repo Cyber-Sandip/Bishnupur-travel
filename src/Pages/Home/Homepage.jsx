@@ -1,9 +1,123 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, Navigate,useNavigate } from "react-router-dom";
+import Nav from "../../Components/navbar";
 
+// Particle Component
+const Particles = () => {
+  const [particles, setParticles] = useState([]);
+
+  useEffect(() => {
+    const particleCount = 50;
+    const newParticles = [];
+
+    for (let i = 0; i < particleCount; i++) {
+      newParticles.push({
+        id: i,
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        size: Math.random() * 3 + 1,
+        speedX: (Math.random() - 0.5) * 0.5,
+        speedY: (Math.random() - 0.5) * 0.5,
+        opacity: Math.random() * 0.5 + 0.2,
+      });
+    }
+
+    setParticles(newParticles);
+
+    const animateParticles = () => {
+      setParticles(prevParticles =>
+        prevParticles.map(particle => {
+          let newX = particle.x + particle.speedX;
+          let newY = particle.y + particle.speedY;
+
+          // Wrap around screen edges
+          if (newX > window.innerWidth) newX = 0;
+          if (newX < 0) newX = window.innerWidth;
+          if (newY > window.innerHeight) newY = 0;
+          if (newY < 0) newY = window.innerHeight;
+
+          return {
+            ...particle,
+            x: newX,
+            y: newY,
+          };
+        })
+      );
+    };
+
+    const interval = setInterval(animateParticles, 50);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="particles-container">
+      {particles.map(particle => (
+        <div
+          key={particle.id}
+          className="particle"
+          style={{
+            left: particle.x,
+            top: particle.y,
+            width: particle.size,
+            height: particle.size,
+            opacity: particle.opacity,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Scroll Progress Component
+const ScrollProgress = () => {
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scroll = (totalScroll / windowHeight) * 100;
+      setScrollProgress(scroll);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="scroll-progress">
+      <div
+        className="scroll-progress-bar"
+        style={{ width: `${scrollProgress}%` }}
+      />
+    </div>
+  );
+};
 
 export default function HomePage() {
+  const [displayText, setDisplayText] = useState("");
+  const fullText = "Bishnupur Travel Guide";
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(loadingTimer);
+  }, []);
+
+  useEffect(() => {
+    if (currentIndex < fullText.length && !isLoading) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + fullText[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, 100);
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, fullText, isLoading]);
 
   const pages = [
     {
@@ -24,13 +138,18 @@ export default function HomePage() {
     
   ];
 
+  const navigate = useNavigate();
+
   return (
     <div className="homepage-root">
+      <ScrollProgress />
+      <Particles />
+      <Nav />
 
       {/* Hero / Title Section */}
       <header className="homepage-hero">
-        <div className="hero-glass">
-          <h1>Bishnupur Travel Guide</h1>
+        <div className="hero-glass animate-fade-in">
+          <h1 className="hero-title">{displayText}<span className="cursor"></span></h1>
           <p className="hero-sub">Explore the temples, crafts and natural beauty of Bishnupur </p>
           <div className="hero-actions">
         </div>
@@ -39,28 +158,71 @@ export default function HomePage() {
 
       
 
-      <button
-          className="contact-btn"
-          onClick={() => navigate("/contact")}
-        >
-          Contact Us
-        </button>
-     
       {/* Cards Section */}
       <div id="cards" className="cards-grid">
         {pages.map((page, index) => (
-          <Link to={page.path} key={index} className="page-card">
-            <img src={page.image} alt={page.title} className="card-image" />
+          <Link
+            to={page.path}
+            key={index}
+            className="page-card animate-fade-in floating-card"
+            style={{ animationDelay: `${index * 0.2}s` }}
+          >
+            <div className="card-image-container">
+              <img src={page.image} alt={page.title} className="card-image" />
+              <div className="card-overlay">
+                <div className="card-icon">
+                  {page.title === "Temples" && "🏛️"}
+                  {page.title === "Art & Craft" && "🎨"}
+                  {page.title === "Natural Beauty" && "🌿"}
+                </div>
+              </div>
+            </div>
             <div className="card-body">
               <h3 className="card-title">{page.title}</h3>
+              <p className="card-description">
+                {page.title === "Temples" && "Explore the magnificent terracotta temples of Bishnupur"}
+                {page.title === "Art & Craft" && "Discover traditional crafts and artistic heritage"}
+                {page.title === "Natural Beauty" && "Experience the serene natural landscapes and parks"}
+              </p>
             </div>
           </Link>
         ))}
       </div>
 
-     
-      
-     
+
+      {/* Footer */}
+      <footer className="homepage-footer mt-16 text-center">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <h3 className="text-lg font-semibold text-orange-600 mb-4">🏛️ Bishnupur Travel</h3>
+              <p className="text-sm text-gray-600">
+                Discover the rich heritage, stunning temples, and vibrant culture of Bishnupur, West Bengal.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-orange-600 mb-4">Quick Links</h3>
+              <ul className="space-y-2 text-sm">
+                <li><Link to="/temples" className="text-gray-600 hover:text-orange-600 transition">Temples</Link></li>
+                <li><Link to="/artandcraft" className="text-gray-600 hover:text-orange-600 transition">Art & Craft</Link></li>
+                <li><Link to="/naturalview" className="text-gray-600 hover:text-orange-600 transition">Natural Beauty</Link></li>
+                <li><Link to="/contact" className="text-gray-600 hover:text-orange-600 transition">Contact Us</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-orange-600 mb-4">Contact Info</h3>
+              <p className="text-sm text-gray-600 mb-2">📍 Bishnupur, Bankura, West Bengal</p>
+              <p className="text-sm text-gray-600 mb-2">📞 03211-24615</p>
+              <p className="text-sm text-gray-600">✉️ info@bishnupurtravel.com</p>
+            </div>
+          </div>
+          <div className="border-t border-gray-200 pt-8">
+            <p className="text-sm text-gray-500">
+              © 2026 Bishnupur Travel Guide. All rights reserved. | Made by Smri..
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

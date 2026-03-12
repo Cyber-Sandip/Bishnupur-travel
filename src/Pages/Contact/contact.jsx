@@ -1,6 +1,16 @@
+import Nav from "../../Components/navbar";
+
 export default function Contact() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Here you would typically send the form data to a server
+    alert('Thank you for your message! We will get back to you soon.');
+    e.target.reset();
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4">
+    <div className="min-h-screen bg-gray-50 py-20 px-4">
+      <Nav />
       
       {/* Page Heading */}
       <div className="text-center mb-10">
@@ -33,7 +43,7 @@ export default function Contact() {
         </div>
 
         {/* Contact Form */}
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
             <label className="block text-gray-700 font-medium">
               Full Name

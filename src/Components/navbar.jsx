@@ -1,58 +1,123 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Nav(){
     const navigate = useNavigate();
+    const location = useLocation();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    const navItems = [
+        { path: '/', label: 'Home' },
+        { path: '/temples', label: 'Temples' },
+        { path: '/artandcraft', label: 'Art & Craft' },
+        { path: '/naturalview', label: 'Natural View' },
+        { path: '/contact', label: 'Contact' }
+    ];
+
+    useEffect(() => {
+        if (isDarkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [isDarkMode]);
+
+    const toggleTheme = () => {
+        setIsDarkMode(!isDarkMode);
+    };
+
     return(
-        <div className="flex flex-row justify-between">
-            <div className="flex p-5">
-                <img src="./img1.jpg" alt="profile img 1" className="w-12 h-12 rounded-full object-cover"/>
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-lg">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center h-16">
+                    {/* Logo */}
+                    <div className="flex items-center">
+                        <div className="shrink-0">
+                            <h1 className="text-2xl font-bold bg-linear-to-r from-orange-600 to-orange-800 bg-clip-text text-transparent">
+                                🏛️ Bishnupur
+                            </h1>
+                        </div>
+                    </div>
+
+                    {/* Desktop Navigation */}
+                    <div className="hidden md:block">
+                        <div className="ml-10 flex items-baseline space-x-4">
+                            {navItems.map((item) => (
+                                <button
+                                    key={item.path}
+                                    onClick={() => navigate(item.path)}
+                                    className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
+                                        location.pathname === item.path
+                                            ? 'bg-orange-100 text-orange-700 border-b-2 border-orange-500'
+                                            : 'text-gray-700 hover:bg-orange-50 hover:text-orange-600'
+                                    }`}
+                                >
+                                    {item.label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Theme Toggle */}
+                    <div className="hidden md:block ml-4">
+                        <button
+                            onClick={toggleTheme}
+                            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 transition-all duration-300 hover:scale-110"
+                        >
+                            {isDarkMode ? (
+                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                                </svg>
+                            ) : (
+                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                                </svg>
+                            )}
+                        </button>
+                    </div>
+
+                    {/* Mobile menu button */}
+                    <div className="md:hidden">
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className="bg-orange-600 inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                        >
+                            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                {isMenuOpen ? (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                ) : (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                )}
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div className=" flex gap-4 pt-4">
 
-                <div className="flex gap-4">
-                
-                    <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                    onClick={() => navigate('/')}
-                    >
-                        Home
-                    </button>
-
-                    <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                    onClick={() => navigate('/Temple')}
-                    >
-                        Temple
-                    </button>
-
-                    <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                    onClick={() => navigate('/art')}
-                    >
-                        Art & craft                    
-                    </button>
-
-                    <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                    onClick={() => navigate('/Natural-view')}
-                    >
-                        Natural View
-                    </button>
-
-                    <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                    onClick={() => navigate('/Contact')}
-                    >
-                        Contact us
-                    </button>
-                    
-                
-                   
-
-                </div>                 
-                
-            </div>
-            <div className="Flex p-5">
-                <img src="./img2.jpg" alt="profile img 2" className="w-12 h-12 rounded-full object-cover"/>
-            </div>
-
-        </div>
-        
+            {/* Mobile Navigation */}
+            {isMenuOpen && (
+                <div className="md:hidden">
+                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                        {navItems.map((item) => (
+                            <button
+                                key={item.path}
+                                onClick={() => {
+                                    navigate(item.path);
+                                    setIsMenuOpen(false);
+                                }}
+                                className={`block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-all duration-300 ${
+                                    location.pathname === item.path
+                                        ? 'bg-orange-100 text-orange-700'
+                                        : 'text-gray-700 hover:bg-orange-50 hover:text-orange-600'
+                                }`}
+                            >
+                                {item.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </nav>
     );
 }
