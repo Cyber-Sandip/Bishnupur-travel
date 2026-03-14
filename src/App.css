@@ -86,24 +86,25 @@ body{
 }
 
 .hero-glass h1{
-    font-family:'Playfair Display',serif;
+    font-family:'bold italic serif', 'Playfair Display', serif;
     font-size:48px;
     margin-bottom:16px;
     color:hwb(124 0% 3%);
     text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, hsl(60, 83%, 66%) 0%, hsl(56, 95%, 42%) 100%);
+    background: linear-gradient(135deg, #f4eeee 0%, #ea9b85 50%, #e947bb 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    
     background-clip: text;
 }
 
 .hero-sub{
-    font-size:20px;
-    color:hwb(63 3% 5%);
-    line-height:1.6;
+    font-size:10px;
+    font-style:oblique;
+    color:lch(88.72% 105.5 136.71);
+    line-height:0.5;
     margin-bottom:28px;
     font-weight: 400;
-    opacity: 0.6;
+    opacity: 0.9;
 }
 
 /* ================= BUTTON ================= */
@@ -384,7 +385,7 @@ body{
 
 .cards-grid{
     display:flex;
-    gap:40px;
+    gap:30px;
     justify-content:center;
     flex-wrap:wrap;
     max-width:1400px;
@@ -393,7 +394,7 @@ body{
 }
 
 .page-card{
-    width:300px;
+    width:260px;
     border-radius: var(--card-radius);
     overflow:hidden;
     background: rgba(255, 255, 255, 0.95);
@@ -438,10 +439,10 @@ body{
 
 .card-image{
     width:100%;
-    height:200px;
-    object-fit:cover;
-    object-position:center;
-    display:block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+    display: block;
     transition: var(--transition-smooth);
     filter: brightness(1.1) contrast(1.1);
 }
@@ -453,16 +454,16 @@ body{
 /* CARD BODY */
 
 .card-body{
-    padding:10px;
+    padding:8px;
     text-align:center;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
     backdrop-filter: blur(10px);
 }
 
 .card-title{
-    font-size:20px;
+    font-size:18px;
     font-weight:700;
-    margin-bottom:12px;
+    margin-bottom:10px;
     color:hsl(210, 93%, 29%);
     text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
@@ -472,7 +473,7 @@ body{
 }
 
 .card-description{
-    font-size:15px;
+    font-size:14px;
     color:#666;
     line-height:1.6;
     font-weight: 400;
