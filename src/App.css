@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
 :root{
-    --card-radius:16px;
+    --card-radius:20px;
     --primary-gradient: linear-gradient(135deg, #ff7a18 0%, #ff4500 100%);
     --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --glass-bg: rgba(255, 255, 255, 0.1);
@@ -30,11 +30,6 @@ body{
     overflow-x: hidden;
 }
 
-.dark body {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 100%);
-    color: #e5e5e5;
-}
-
 /* ================= HOME PAGE ================= */
 .homepage-root{
     min-height:100vh;
@@ -54,13 +49,6 @@ body{
     background-position:center;
     background-repeat:no-repeat;
     background-attachment: fixed;
-}
-
-.dark .homepage-root {
-    background-image:
-        radial-gradient(circle at 20% 80%, rgba(255, 122, 24, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(102, 126, 234, 0.2) 0%, transparent 50%),
-        linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
 }
 
 /* ================= HERO ================= */
@@ -103,7 +91,7 @@ body{
     margin-bottom:16px;
     color:hwb(124 0% 3%);
     text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    background: linear-gradient(135deg, hsl(60, 83%, 66%) 0%, hsl(56, 95%, 42%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -115,26 +103,7 @@ body{
     line-height:1.6;
     margin-bottom:28px;
     font-weight: 400;
-    opacity: 0.9;
-}
-
-/* Dark Mode Hero Styles */
-.dark .hero-glass {
-    background: rgba(30, 30, 30, 0.8);
-    backdrop-filter: blur(25px);
-    border: 1px solid #fffffff4;
-    box-shadow: var(--shadow-strong), var(--glow-purple);
-}
-
-.dark .hero-glass h1 {
-    background: linear-gradient(135deg, #ffffff 0%, #e5e5e5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.dark .hero-sub {
-    color: #cccccc;
+    opacity: 0.6;
 }
 
 /* ================= BUTTON ================= */
@@ -484,14 +453,14 @@ body{
 /* CARD BODY */
 
 .card-body{
-    padding:20px;
+    padding:10px;
     text-align:center;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
     backdrop-filter: blur(10px);
 }
 
 .card-title{
-    font-size:22px;
+    font-size:20px;
     font-weight:700;
     margin-bottom:12px;
     color:hsl(210, 93%, 29%);
@@ -507,23 +476,6 @@ body{
     color:#666;
     line-height:1.6;
     font-weight: 400;
-}
-/* Dark Mode Card Styles */
-.dark .page-card {
-    background: rgba(30, 30, 30, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(25px);
-}
-
-.dark .card-title {
-    background: linear-gradient(135deg, #ffffff 0%, #e5e5e5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.dark .card-description {
-    color: #cccccc;
 }
 /* ================= ANIMATIONS ================= */
 
@@ -627,19 +579,6 @@ body{
     background: var(--primary-gradient);
 }
 
-.dark .homepage-footer {
-    background: rgba(30, 30, 30, 0.95);
-    color: #e5e5e5;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.dark .homepage-footer h3 {
-    color: #ff7a18;
-    background: linear-gradient(135deg, #ff7a18 0%, #ff4500 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
 
 /* ================= MOBILE ================= */
 
